@@ -4,9 +4,24 @@ import React, { Component } from 'react';
 import LocationAutoComplete from './components/LocationAutoComplete';
 
 import logo from './logo.svg';
+import LocationUISelector from './components/LocationUISelector';
 
 class App extends Component {
+
+  state = {
+    selectedLocation: {}
+  };
+
+  onLocationChange = (newLocation) => {
+    let $this = this;
+    console.log('new location:', newLocation);
+    $this.setState({
+      selectedLocation: newLocation
+    });
+  };
+
   render() {
+    let $this = this;
     return (
       <div className="App">
         <header className="App-header">
@@ -15,7 +30,14 @@ class App extends Component {
         </header>
 
         <div className="App-content">
-          <LocationAutoComplete/>
+          <div>
+            <LocationAutoComplete
+              onChange={$this.onLocationChange}
+            />
+            <LocationUISelector
+              {...$this.state.selectedLocation}
+            />
+          </div>
         </div>
       </div>
     );

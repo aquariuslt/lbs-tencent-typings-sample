@@ -26,11 +26,6 @@ class LocationAutoComplete extends React.Component {
     dataSource: []
   };
 
-  constructor(props) {
-    super(props);
-
-  }
-
   componentDidMount() {
     lbsApi.loadScript().then(() => {
     });
@@ -82,16 +77,15 @@ class LocationAutoComplete extends React.Component {
       </Option>
     ));
     return (
-      <div className="lbs-autocomplete-container">
-        <AutoComplete
-          placeholder={SEARCH_PLACEHOLDER}
-          onSearch={$this.onSearch}
-          onSelect={$this.onSelect}
-          optionLabelProp="label"
-        >
-          {options}
-        </AutoComplete>
-      </div>
+      <AutoComplete
+        className="lbs-autocomplete-container"
+        placeholder={SEARCH_PLACEHOLDER}
+        onSearch={$this.onSearch}
+        onSelect={$this.onSelect}
+        optionLabelProp="label"
+      >
+        {options}
+      </AutoComplete>
     );
   }
 }
