@@ -1,0 +1,28 @@
+{
+  "name": "lbs-tencent-typings-sample",
+  "version": "0.1.0",
+  "homepage": "https://aquariuslt.github.io/lbs-tencent-typings-sample",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b ph-pages -d build"
+  },
+  "dependencies": {
+    "antd": "^3.8.0",
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.2",
+    "qs": "^6.5.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.7",
+    "gh-pages": "^1.2.0",
+    "lbs-tencent-typings": "^0.1.0"
+  }
+}
