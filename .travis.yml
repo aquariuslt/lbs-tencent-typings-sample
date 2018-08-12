@@ -8,11 +8,11 @@ script:
   - npm run build
 deploy:
   provider: pages
-  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
-  local_dir: build
-  skip_cleanup: true
-  keep_history: true
+  github-token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  local-dir: build
+  skip-cleanup: true
+  keep-history: true
   on:
     branch: master
-  target_branch: gh-pages
+  target-branch: gh-pages
 
