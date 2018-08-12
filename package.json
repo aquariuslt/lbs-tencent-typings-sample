@@ -7,9 +7,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "antd": "^3.8.0",
