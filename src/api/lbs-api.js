@@ -1,4 +1,5 @@
 import qs from 'qs';
+import _ from 'lodash';
 
 /**
  * LBS API Configurations
@@ -52,8 +53,7 @@ function loadScript() {
         resolve();
       };
       loadMapApiScript();
-    }
-    else if (window[API_SCRIPT_LOADED_FLAG] === API_SCRIPT_LOAD_STATUS.LOADING) {
+    } else if (window[API_SCRIPT_LOADED_FLAG] === API_SCRIPT_LOAD_STATUS.LOADING) {
       console.log('waiting for script complete');
       let waitingId = null;
       waitingId = setInterval(() => {
@@ -62,8 +62,7 @@ function loadScript() {
           resolve();
         }
       }, 500);
-    }
-    else {
+    } else {
       resolve();
     }
   });
@@ -78,11 +77,37 @@ function loadScript() {
  * */
 function searchLocation(keyword) {
   return new Promise((resolve, reject) => {
+    function oneTimeResolve(oneTimeResult) {
+      console.log('first time resolve result:', oneTimeResult);
+      if (_.get(oneTimeResult, 'detail.pois')) {
+        resolve(oneTimeResult);
+      } else {
+        console.log('can not match result, will pass one current result for hinting', oneTimeResult);
+        scaleSearchAreaResolve(oneTimeResult);
+      }
+    }
+
+    function scaleSearchAreaResolve(hints) {
+      let extendLocation = DEFAULT_LOCATION;
+
+      if (_.isEqual(_.get(hints, 'type'), 'CITY_LIST')) {
+        extendLocation = _.head(_.get(hints, 'detail.cities'))['cityName'];
+      }
+
+      let scaleSearchAreaService = new qq.maps.SearchService({
+        location: extendLocation,
+        autoExtend: true,
+        complete: resolve,
+        error: reject
+      });
+      scaleSearchAreaService.search(keyword);
+    }
+
     const qq = window.qq;
     let searchService = new qq.maps.SearchService({
       location: DEFAULT_LOCATION,
       autoExtend: true,
-      complete: resolve,
+      complete: oneTimeResolve,
       error: reject
     });
     searchService.search(keyword);
