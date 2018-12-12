@@ -105,7 +105,6 @@ function searchLocation(keyword) {
 
     const qq = window.qq;
     let searchService = new qq.maps.SearchService({
-      location: DEFAULT_LOCATION,
       autoExtend: true,
       complete: oneTimeResolve,
       error: reject
